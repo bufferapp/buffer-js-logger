@@ -14,6 +14,6 @@ Use as middleware
 const logger = require('@bufferapp/logger/middleware');
 
 app = express();
-app.use(requestLogger());
+app.use(logger({ name: 'My-App' }));
 // ...other middleware and route handlers
 ```
