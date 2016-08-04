@@ -1,0 +1,36 @@
+{
+  "name": "@bufferapp/logger",
+  "version": "0.1.0",
+  "description": "Logging for Buffer.com's node applications",
+  "main": "logger.js",
+  "scripts": {
+    "lint": "./node_modules/eslint/bin/eslint.js --ignore-pattern coverage .",
+    "test": "./node_modules/mocha/bin/mocha",
+    "test-watch": "./node_modules/mocha/bin/mocha -w",
+    "coverage": "./node_modules/.bin/istanbul cover _mocha"
+  },
+  "author": "Dan Farrelly <daniel.j.farrelly@gmail.com> (http://danfarrelly.nyc)",
+  "homepage": "https://github.com/bufferapp/node-logging#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bufferapp/node-logging.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bufferapp/node-logging/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bunyan": "1.8.1",
+    "on-finished": "2.3.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.11.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^1.2.3",
+    "eslint-plugin-react": "^5.1.1",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3"
+  }
+}
