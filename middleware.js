@@ -24,8 +24,8 @@ module.exports = function middleware({
     streams.push({
       type: 'rotating-file',
       path: path,
-      period: '1d',
-      count: 3
+      period: '1h',
+      count: 5
     });
   }
 
