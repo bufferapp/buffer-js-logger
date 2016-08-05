@@ -1,0 +1,6 @@
+.git*
+test/
+
+.editorconfig
+.eslintrc.json
+.gitignore
