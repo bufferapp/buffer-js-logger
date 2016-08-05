@@ -4,3 +4,4 @@ test/
 .editorconfig
 .eslintrc.json
 .gitignore
+.travis.yml
