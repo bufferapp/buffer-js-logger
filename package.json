@@ -10,13 +10,13 @@
     "coverage": "./node_modules/.bin/istanbul cover _mocha"
   },
   "author": "Dan Farrelly <daniel.j.farrelly@gmail.com> (http://danfarrelly.nyc)",
-  "homepage": "https://github.com/bufferapp/node-logging#readme",
+  "homepage": "https://github.com/bufferapp/node-logger#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bufferapp/node-logging.git"
+    "url": "git+https://github.com/bufferapp/node-logger.git"
   },
   "bugs": {
-    "url": "https://github.com/bufferapp/node-logging/issues"
+    "url": "https://github.com/bufferapp/node-logger/issues"
   },
   "license": "MIT",
   "dependencies": {
