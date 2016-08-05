@@ -9,10 +9,12 @@ const { removeTokensFromQuery, removeTokensFromUrl } = require('./lib/utils');
  * @param {Object.<String>}
  * @return {Function}
  */
-module.exports = function middleware({
-  name,
-  path: '/var/log/application.log'
-}) {
+module.exports = function middleware(options) {
+  const {
+    name,
+    path = '/var/log/application.log',
+    getStats,
+  } = options;
 
   if (!name) {
     throw new Error('Please provide a name');
@@ -23,15 +25,15 @@ module.exports = function middleware({
   if (process.env.NODE_ENV === 'production') {
     streams.push({
       type: 'rotating-file',
-      path: path,
+      path,
       period: '1h',
-      count: 5
+      count: 5,
     });
   }
 
   const logger = bunyan.createLogger({
-    name: name,
-    streams: streams,
+    name,
+    streams,
     serializers: bunyan.stdSerializers,
   });
 
@@ -68,12 +70,7 @@ module.exports = function middleware({
         response.error = req.errorLog;
       }
 
-      const stats = !req.trackingData ? {} : {
-        responseTime,
-        externalRequestTime: req.trackingData.externalRequestTime,
-        processingTime: responseTime - req.trackingData.externalRequestTime,
-        images: req.trackingData.images,
-      };
+      const stats = getStats ? getStats(req, responseTime) : {};
 
       const msg = `${req.method} ${cleanUrl} ${res.statusCode} - ${responseTime}ms`;
       const info = {
