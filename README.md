@@ -1,5 +1,7 @@
 # @bufferapp/logger
 
+[![NPM Version](https://img.shields.io/npm/v/@bufferapp/logger.svg)](https://www.npmjs.com/package/@bufferapp/logger)
+
 Provides logging standard middleware and functions.
 
 Install the node package
