@@ -58,7 +58,6 @@ module.exports = function middleware(options) {
 
     onFinished(res, () => {
       const finishTime = new Date();
-      const time = finishTime.toJSON();
       const responseTime = finishTime.getTime() - startTime.getTime();
 
       const response = {
@@ -74,8 +73,6 @@ module.exports = function middleware(options) {
 
       const msg = `${req.method} ${cleanUrl} ${res.statusCode} - ${responseTime}ms`;
       const info = {
-        '@timestamp': time,
-        time,
         request,
         response,
         stats,
