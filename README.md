@@ -15,6 +15,25 @@ npm install @bufferapp/logger -SE
 
 ## Usage
 
+To use as a normal logger, require and create the logger:
+
+```js
+const logger = require('@bufferapp/logger')({ name: 'Some-Worker' });
+
+function run(data) {
+  // log something one-off...
+  logger.info({
+    metadata: {
+      service: data.service,
+    },
+    stats: {
+      processingTime: data.time,
+      count: data.count,
+    }
+  }, `Successfully processed ${data.count} items`);
+}
+```
+
 ### Middleware
 
 ```js
@@ -49,25 +68,3 @@ app.get('/get-images', (req, res) => {
   });
 });
 ```
-
-### Normal logging
-
-To use as a normal logger, require and create the logger:
-
-```js
-const logger = require('@bufferapp/logger')({ name: 'Some-Worker' });
-
-function run(data) {
-  // log something one-off...
-  logger.info({
-    metadata: {
-      service: data.service,
-    },
-    stats: {
-      processingTime: data.time,
-      count: data.count,
-    }
-  }, `Successfully processed ${data.count} items`);
-}
-```
-
