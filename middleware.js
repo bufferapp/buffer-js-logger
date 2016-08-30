@@ -1,4 +1,5 @@
 const bunyan = require('bunyan');
+const createLogger = require('./logger');
 const onFinished = require('on-finished');
 const { removeTokensFromQuery, removeTokensFromUrl } = require('./lib/utils');
 
@@ -10,32 +11,8 @@ const { removeTokensFromQuery, removeTokensFromUrl } = require('./lib/utils');
  * @return {Function}
  */
 module.exports = function middleware(options) {
-  const {
-    name,
-    path = '/var/log/application.log',
-    getStats,
-  } = options;
-
-  if (!name) {
-    throw new Error('Please provide a name');
-  }
-
-  const streams = [{ stream: process.stdout }];
-
-  if (process.env.NODE_ENV === 'production') {
-    streams.push({
-      type: 'rotating-file',
-      path,
-      period: '1h',
-      count: 5,
-    });
-  }
-
-  const logger = bunyan.createLogger({
-    name,
-    streams,
-    serializers: bunyan.stdSerializers,
-  });
+  const logger = createLogger(options);
+  const { getStats } = options;
 
   return function logRequest(req, res, next) {
     const startTime = new Date();
