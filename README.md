@@ -5,19 +5,21 @@
 
 Provides logging standard middleware and functions.
 
-Install the node package
+## Install
 
 ```
 npm install @bufferapp/logger -SE
 ```
 
-Basic use as middleware
+## Usage
+
+### Middleware
 
 ```js
-const logger = require('@bufferapp/logger/middleware');
+const logMiddleware = require('@bufferapp/logger/middleware');
 
 app = express();
-app.use(logger({ name: 'My-App' }));
+app.use(logMiddleware({ name: 'My-App' }));
 // ...other middleware and route handlers
 ```
 
@@ -26,7 +28,7 @@ milliseconds. For example, you can add tracking metrics to a `req.trackingData` 
 then handle them in your `getStats` method:
 
 ```js
-app.use(logger({
+app.use(logMiddleware({
   name: 'My-App',
   getStats: (req, responseTime) => {
     return {
