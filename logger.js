@@ -27,5 +27,11 @@ module.exports = function createLogger(options) {
     serializers: bunyan.stdSerializers,
   });
 
+  logger._info = logger.info;
+  logger.info = function(data, msg) {
+    data.timestamp = new Date();
+    return this._info(data, msg);
+  };
+
   return logger;
 };

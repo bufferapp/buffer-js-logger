@@ -53,4 +53,21 @@ describe('logger', () => {
     assert.equal(outputData.msg, msg);
   });
 
+  it('should log a timestamp field', () => {
+    const name = 'Test-timestamp';
+    const logger = createLogger({ name });
+    stdout.capture();
+    const before = new Date();
+    logger.info({ metadata: { type: 'test' } }, 'Test message');
+    const after = new Date();
+    const output = stdout.stop();
+    const outputData = JSON.parse(output[0]);
+    assert.property(outputData, 'timestamp');
+    assert.isString(outputData.timestamp, 'timestamp should be json string');
+    const timestamp = new Date(outputData.timestamp);
+    assert.instanceOf(timestamp, Date, 'timestamp can be parsed');
+    assert.isAtLeast(timestamp, before, 'should be in range');
+    assert.isAtMost(timestamp, after, 'should be in range');
+  });
+
 });
