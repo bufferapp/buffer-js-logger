@@ -33,7 +33,7 @@ describe('logger', () => {
     logger.info({ metadata: { type: 'test' } }, 'Test message');
     const output = stdout.stop();
     try {
-      const outputData = JSON.parse(output[0]);
+      JSON.parse(output[0]);
     } catch (err) {
       assert.fail(null, null, 'Could not parse output as valid JSON');
     }

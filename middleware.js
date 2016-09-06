@@ -1,4 +1,3 @@
-const bunyan = require('bunyan');
 const createLogger = require('./logger');
 const onFinished = require('on-finished');
 const { removeTokensFromQuery, removeTokensFromUrl } = require('./lib/utils');

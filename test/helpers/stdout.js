@@ -1,7 +1,7 @@
 
 class StdoutCapture {
   write(l) {
-    this.output.push(l)
+    this.output.push(l);
   }
   capture() {
     this.output = [];
