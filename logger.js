@@ -1,29 +1,13 @@
 const bunyan = require('bunyan');
 
-module.exports = function createLogger(options) {
-  const {
-    name,
-    path = '/var/log/application.log',
-  } = options;
-
+module.exports = function createLogger({ name }) {
   if (!name) {
     throw new Error('Please provide a name');
   }
 
-  const streams = [{ stream: process.stdout }];
-
-  if (process.env.NODE_ENV === 'production') {
-    streams.push({
-      type: 'rotating-file',
-      path,
-      period: '5h',
-      count: 0,
-    });
-  }
-
   const logger = bunyan.createLogger({
     name,
-    streams,
+    streams: [{ stream: process.stdout }],
     serializers: bunyan.stdSerializers,
   });
 
