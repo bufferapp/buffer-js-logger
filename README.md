@@ -3,9 +3,8 @@
 [![NPM Version](https://img.shields.io/npm/v/@bufferapp/logger.svg)](https://www.npmjs.com/package/@bufferapp/logger)
 [![Build Status](https://travis-ci.org/bufferapp/node-logger.svg?branch=master)](https://travis-ci.org/bufferapp/node-logger)
 
-Provides logging standard middleware and functions. This will always log to stdout and will
-additionally log to `/var/log/application.log` in production. This path can be overwritten using
-the `path` parameter.
+Provides standard middleware and functions for logging to stdout. In our production cluster these
+logs will be indexed in our application-logs Elasticsearch cluster as well as get backed up in s3.
 
 ## Install
 
