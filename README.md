@@ -14,6 +14,13 @@ npm install @bufferapp/logger -SE
 
 ## Usage
 
+To log something, use the logger's `info` method which takes 2 arguments, an object for
+structured logging and a string for a message:
+
+```js
+logger.info(<Object>, <String>);
+```
+
 To use as a normal logger, require and create the logger:
 
 ```js
