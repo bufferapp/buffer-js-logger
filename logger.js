@@ -1,13 +1,29 @@
 const bunyan = require('bunyan');
+const fluentL = require('fluent-logger');
 
-module.exports = function createLogger({ name }) {
+module.exports = function createLogger({ name, output, host, port }) {
   if (!name) {
     throw new Error('Please provide a name');
   }
 
+  let stream = process.stdout;
+
+  if (output === 'td-agent-forward') {
+    var sender = fluentL.createFluentSender('', {
+      host,
+      port,
+      timeout: 3.0,
+      levelTag: false,
+      reconnectInterval: 600000 // 10 minutes
+    });
+    stream = sender.toStream('application.logs');
+  } else {
+    stream = process.stdout;
+  }
+
   const logger = bunyan.createLogger({
     name,
-    streams: [{ stream: process.stdout }],
+    streams: [{ stream: stream }],
     serializers: bunyan.stdSerializers,
   });
 
