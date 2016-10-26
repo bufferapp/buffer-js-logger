@@ -9,12 +9,12 @@ module.exports = function createLogger({ name, output, host, port }) {
   let stream = process.stdout;
 
   if (output === 'td-agent-forward') {
-    var sender = fluentL.createFluentSender('', {
+    const sender = fluentL.createFluentSender('', {
       host,
       port,
       timeout: 3.0,
       levelTag: false,
-      reconnectInterval: 600000 // 10 minutes
+      reconnectInterval: 600000,
     });
     stream = sender.toStream('application.logs');
   } else {
@@ -23,7 +23,7 @@ module.exports = function createLogger({ name, output, host, port }) {
 
   const logger = bunyan.createLogger({
     name,
-    streams: [{ stream: stream }],
+    streams: [{ stream }],
     serializers: bunyan.stdSerializers,
   });
 

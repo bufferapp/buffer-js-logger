@@ -21,10 +21,15 @@ describe('logger', () => {
   });
 
   it('should return instance of logger for td-agent forward', () => {
-    runServer({}, function(server, finish) {
+    runServer({}, (server, finish) => {
       const logger = createLogger({ name: 'Test', output: 'td-agent-forward', port: server.port });
       assert.isObject(logger);
       assert.isFunction(logger.info);
+      logger.info({ metadata: { type: 'test' } }, 'Test message');
+      setTimeout(() => {
+        finish(() => {
+        });
+      }, 1000);
     });
   });
 
@@ -36,14 +41,13 @@ describe('logger', () => {
     assert.lengthOf(output, 1, 'it should output a single line');
   });
 
-  it('should log to td-agent forward', function(done){
-    runServer({}, function(server, finish) {
+  it('should log to td-agent forward', (done) => {
+    runServer({}, (server, finish) => {
       const logger = createLogger({ name: 'Test-forward', output: 'td-agent-forward', port: server.port });
       logger.info({ metadata: { type: 'test' } }, 'Test message');
-      setTimeout(function(){
-        finish(function(data) {
+      setTimeout(() => {
+        finish((data) => {
           expect(data[0].tag).to.be.equal('application.logs');
-          expect(data[0].data).exist;
           done();
         });
       }, 1000);
@@ -63,12 +67,12 @@ describe('logger', () => {
     }
   });
 
-  it('should log in a json encoded outout to td-agent forward', function(done){
-    runServer({}, function(server, finish) {
+  it('should log in a json encoded outout to td-agent forward', (done) => {
+    runServer({}, (server, finish) => {
       const logger = createLogger({ name: 'Test-forward', output: 'td-agent-forward', port: server.port });
       logger.info({ metadata: { type: 'test' } }, 'Test message');
-      setTimeout(function(){
-        finish(function(data) {
+      setTimeout(() => {
+        finish((data) => {
           try {
             JSON.parse(data[0].data.message);
           } catch (err) {
@@ -94,15 +98,15 @@ describe('logger', () => {
     assert.equal(outputData.msg, msg);
   });
 
-  it('should log correctly structured json to td-agent forward', function(done){
+  it('should log correctly structured json to td-agent forward', (done) => {
     const name = 'Test-json';
     const type = 'test';
     const msg = 'Test message';
-    runServer({}, function(server, finish) {
-      const logger = createLogger({ name: name, output: 'td-agent-forward', port: server.port });
+    runServer({}, (server, finish) => {
+      const logger = createLogger({ name, output: 'td-agent-forward', port: server.port });
       logger.info({ metadata: { type } }, msg);
-      setTimeout(function() {
-        finish(function(data) {
+      setTimeout(() => {
+        finish((data) => {
           const outputData = JSON.parse(data[0].data.message);
           assert.equal(outputData.name, name);
           assert.equal(outputData.metadata.type, type);
@@ -130,15 +134,15 @@ describe('logger', () => {
     assert.isAtMost(timestamp, after, 'should be in range');
   });
 
-  it('should log a timestamp field to td-agent forward', function(done) {
+  it('should log a timestamp field to td-agent forward', (done) => {
     const name = 'Test-timestamp';
-    runServer({}, function(server, finish) {
-      const logger = createLogger({ name: name, output: 'td-agent-forward', port: server.port });
+    runServer({}, (server, finish) => {
+      const logger = createLogger({ name, output: 'td-agent-forward', port: server.port });
       const before = new Date();
       logger.info({ metadata: { type: 'test' } }, 'Test message');
       const after = new Date();
-      setTimeout(function() {
-        finish(function(data) {
+      setTimeout(() => {
+        finish((data) => {
           const outputData = JSON.parse(data[0].data.message);
           assert.property(outputData, 'timestamp');
           assert.isString(outputData.timestamp, 'timestamp should be json string');
