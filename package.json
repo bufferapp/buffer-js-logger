@@ -1,6 +1,6 @@
 {
   "name": "@bufferapp/logger",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Logging for Buffer.com's node applications",
   "main": "logger.js",
   "scripts": {
@@ -21,7 +21,8 @@
   "license": "MIT",
   "dependencies": {
     "bunyan": "1.8.1",
-    "on-finished": "2.3.0"
+    "on-finished": "2.3.0",
+    "fluent-logger": "2.2.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -31,6 +32,7 @@
     "eslint-plugin-jsx-a11y": "^1.2.3",
     "eslint-plugin-react": "^5.1.1",
     "istanbul": "^0.4.3",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "msgpack-lite": "^0.1.26"
   }
 }
