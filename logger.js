@@ -17,8 +17,6 @@ module.exports = function createLogger({ name, output, host, port }) {
       reconnectInterval: 600000,
     });
     stream = sender.toStream('application.logs');
-  } else {
-    stream = process.stdout;
   }
 
   const logger = bunyan.createLogger({
