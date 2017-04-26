@@ -1,7 +1,7 @@
 # @bufferapp/logger
 
 [![NPM Version](https://img.shields.io/npm/v/@bufferapp/logger.svg)](https://www.npmjs.com/package/@bufferapp/logger)
-[![Build Status](https://travis-ci.org/bufferapp/node-logger.svg?branch=master)](https://travis-ci.org/bufferapp/node-logger)
+[![Build Status](https://travis-ci.org/bufferapp/buffer-js-logger.svg?branch=master)](https://travis-ci.org/bufferapp/buffer-js-logger)
 
 Provides standard middleware and functions for logging to stdout. In our production cluster these
 logs will be indexed in our application-logs Elasticsearch cluster as well as get backed up in s3.
