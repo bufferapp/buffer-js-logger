@@ -1,6 +1,6 @@
 const createLogger = require('./logger');
 const onFinished = require('on-finished');
-const { removeTokensFromQuery, removeTokensFromUrl } = require('./lib/utils');
+const { getRequestDataToLog } = require('./lib/utils');
 
 /**
  * middleware
@@ -15,22 +15,7 @@ module.exports = function middleware(options) {
 
   return function logRequest(req, res, next) {
     const startTime = new Date();
-
-    const cleanUrl = removeTokensFromUrl(req.url);
-
-    const request = {
-      url: cleanUrl,
-      method: req.method,
-      params: removeTokensFromQuery(req.query),
-      connection: {
-        remoteAddress: req.connection.remoteAddress,
-        remotePort: req.connection.remotePort,
-      },
-    };
-
-    // Copy headers, removing cookies from the noise
-    request.headers = Object.assign({}, req.headers);
-    delete request.headers.cookie;
+    const request = getRequestDataToLog(req);
 
     onFinished(res, () => {
       const finishTime = new Date();
@@ -48,7 +33,7 @@ module.exports = function middleware(options) {
 
       const stats = getStats ? getStats(req, responseTime) : {};
 
-      const msg = `${req.method} ${cleanUrl} ${res.statusCode} - ${responseTime}ms`;
+      const msg = `${req.method} ${request.url} ${res.statusCode} - ${responseTime}ms`;
       const info = {
         timestamp,
         request,

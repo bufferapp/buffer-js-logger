@@ -4,6 +4,7 @@ const { assert } = require('chai');
 const {
   removeTokensFromQuery,
   removeTokensFromUrl,
+  getRequestDataToLog,
 } = require('../lib/utils');
 
 describe('utils', () => {
@@ -18,6 +19,10 @@ describe('utils', () => {
     it('should not touch non token params', () => {
       assert.deepEqual(removeTokensFromQuery({ access_token: '1234', id: 100 }), { access_token: '*', id: 100 });
       assert.deepEqual(removeTokensFromQuery({ token: '5678', client_id: 'ABCD' }), { token: '*', client_id: 'ABCD' });
+    });
+
+    it('should handle undefined query argument', () => {
+      assert.deepEqual(removeTokensFromQuery(undefined), {});
     });
 
   });
@@ -43,6 +48,60 @@ describe('utils', () => {
         'http://test.com/?url=http%3A%2F%2Fok.com');
       assert.equal(removeTokensFromUrl('http://test.com/ok/path'),
         'http://test.com/ok/path');
+    });
+
+  });
+
+  describe('getRequestDataToLog', () => {
+
+    it('should grab the data we want to track', () => {
+      const req = {
+        url: '/path?key=val',
+        path: '/path?key=val',
+        method: 'GET',
+        query: {
+          key: 'val',
+        },
+        connection: {
+          remoteAddress: '::ffff:172.18.0.12',
+          remotePort: 40234,
+        },
+        headers: {
+          'user-agent': 'Mozilla/5.0',
+          cookie: 'ok',
+        },
+      };
+      const data = getRequestDataToLog(req);
+      assert.deepEqual(data, {
+        url: '/path?key=val',
+        method: 'GET',
+        params: {
+          key: 'val',
+        },
+        connection: {
+          remoteAddress: '::ffff:172.18.0.12',
+          remotePort: 40234,
+        },
+        headers: {
+          'user-agent': 'Mozilla/5.0',
+        },
+      });
+    });
+
+    it('should handle requests with unparsed query objects', () => {
+      const req = {
+        url: '/path?key=val',
+        method: 'GET',
+        connection: {
+          remoteAddress: '::ffff:172.18.0.12',
+          remotePort: 40234,
+        },
+        headers: {
+          cookie: 'ok',
+        },
+      };
+      const data = getRequestDataToLog(req);
+      assert.equal(data.params.key, 'val');
     });
 
   });

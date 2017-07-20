@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7
+
+* Support for micro http framework
+
 ## 0.6
 
 * Add Fluentd forward over tcp functionality
