@@ -7,7 +7,8 @@
     "lint": "./node_modules/eslint/bin/eslint.js --ignore-pattern coverage .",
     "test": "./node_modules/mocha/bin/mocha",
     "test-watch": "./node_modules/mocha/bin/mocha -w",
-    "coverage": "./node_modules/.bin/istanbul cover _mocha"
+    "coverage": "./node_modules/.bin/istanbul cover _mocha",
+    "prepublish": "npm run lint && npm t"
   },
   "author": "Dan Farrelly <daniel.j.farrelly@gmail.com> (http://danfarrelly.nyc)",
   "homepage": "https://github.com/bufferapp/node-logger#readme",
