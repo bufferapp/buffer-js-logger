@@ -11,13 +11,13 @@
     "prepublish": "npm run lint && npm t"
   },
   "author": "Dan Farrelly <daniel.j.farrelly@gmail.com> (http://danfarrelly.nyc)",
-  "homepage": "https://github.com/bufferapp/node-logger#readme",
+  "homepage": "https://github.com/bufferapp/buffer-js-logger#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bufferapp/node-logger.git"
+    "url": "git+https://github.com/bufferapp/buffer-js-logger.git"
   },
   "bugs": {
-    "url": "https://github.com/bufferapp/node-logger/issues"
+    "url": "https://github.com/bufferapp/buffer-js-logger/issues"
   },
   "license": "MIT",
   "dependencies": {
