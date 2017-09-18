@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8
+
+* Add `getMetadata` option to append metadata with middleware
+
 ## 0.7
 
 * Support for micro http framework
