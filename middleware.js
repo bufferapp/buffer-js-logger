@@ -11,7 +11,10 @@ const { getRequestDataToLog } = require('./lib/utils');
  */
 module.exports = function middleware(options) {
   const logger = createLogger(options);
-  const { getStats } = options;
+  const {
+    getMetadata,
+    getStats,
+  } = options;
 
   return function logRequest(req, res, next) {
     const startTime = new Date();
@@ -31,6 +34,7 @@ module.exports = function middleware(options) {
         response.error = req.errorLog;
       }
 
+      const metadata = getMetadata ? getMetadata(req) : {};
       const stats = getStats ? getStats(req, responseTime) : {};
 
       const msg = `${req.method} ${request.url} ${res.statusCode} - ${responseTime}ms`;
@@ -38,6 +42,7 @@ module.exports = function middleware(options) {
         timestamp,
         request,
         response,
+        metadata,
         stats,
       };
 
