@@ -50,6 +50,23 @@ app.use(logMiddleware({ name: 'My-App' }));
 // ...other middleware and route handlers
 ```
 
+#### Metadata
+
+Add application metadata to your logs using the `getMetadata` option.
+
+```js
+app.use(logMiddleware({
+  getMetadata: (req) => {
+    return {
+      userId: req.session.userId,
+      profileId: req.query.profileId,
+    };
+  };
+}));
+```
+
+#### Stats
+
 Add application stats to your logs. You receive the request object and the response time in
 milliseconds. For example, you can add tracking metrics to a `req.trackingData` attribute and
 then handle them in your `getStats` method:
