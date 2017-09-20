@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9
+
+* Log only standard `request.headers`
+* Log only specified `request.params` via `params` middleware option
+
 ## 0.8
 
 * Add `getMetadata` option to append metadata with middleware
