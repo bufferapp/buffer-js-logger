@@ -77,17 +77,23 @@ describe('utils', () => {
           remotePort: 40234,
         },
         headers: {
+          host: 'buffer.com',
           'user-agent': 'Mozilla/5.0',
           referer: 'https://twitter.com',
           'cache-control': 'no-cache',
+          'x-real-ip': '172.18.0.1',
+          'x-forwarded-for': '172.18.0.1',
           'x-something-bogus': false,
-        }
+        },
       };
       const data = getRequestDataToLog(req);
       assert.deepEqual(data.headers, {
+        host: 'buffer.com',
         'user-agent': 'Mozilla/5.0',
         referer: 'https://twitter.com',
         'cache-control': 'no-cache',
+        'x-real-ip': '172.18.0.1',
+        'x-forwarded-for': '172.18.0.1',
       });
     });
 

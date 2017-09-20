@@ -61,7 +61,7 @@ app.use(logMiddleware({
       userId: req.session.userId,
       profileId: req.query.profileId,
     };
-  };
+  },
 }));
 ```
 
@@ -80,7 +80,7 @@ app.use(logMiddleware({
       processingTime: responseTime - req.trackingData.externalRequestTime,
       imagesScanned: req.trackingData.imagesScanned,
     };
-  };
+  },
 }));
 // In your request handler
 app.get('/get-images', (req, res) => {
@@ -90,4 +90,14 @@ app.get('/get-images', (req, res) => {
     res.json(images);
   });
 });
+```
+
+#### Params
+
+Add logging of specific query string params using the `getMetadata` option.
+
+```js
+app.use(logMiddleware({
+  params: ['profile_id', 'utm_campaign'],
+}));
 ```

@@ -14,11 +14,12 @@ module.exports = function middleware(options) {
   const {
     getMetadata,
     getStats,
+    params,
   } = options;
 
   return function logRequest(req, res, next) {
     const startTime = new Date();
-    const request = getRequestDataToLog(req);
+    const request = getRequestDataToLog(req, params);
 
     onFinished(res, () => {
       const finishTime = new Date();
