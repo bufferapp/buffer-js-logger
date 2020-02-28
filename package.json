@@ -21,9 +21,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@bufferapp/bufflog": "0.0.3",
     "bunyan": "1.8.1",
-    "on-finished": "2.3.0",
-    "fluent-logger": "2.2.0"
+    "fluent-logger": "2.2.0",
+    "on-finished": "2.3.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
