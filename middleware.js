@@ -1,4 +1,3 @@
-const createLogger = require('./logger');
 const BuffLog = require('bufflog');
 const onFinished = require('on-finished');
 const { getRequestDataToLog } = require('./lib/utils');
@@ -52,7 +51,6 @@ module.exports = function middleware(options) {
       } else {
         BuffLog.info(msg, info);
       }
-
     });
 
     next();
