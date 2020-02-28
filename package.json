@@ -1,6 +1,6 @@
 {
   "name": "@bufferapp/logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Logging for Buffer.com's node applications",
   "main": "logger.js",
   "scripts": {
@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@bufferapp/bufflog": "0.0.3",
+    "@bufferapp/bufflog": "0.0.4",
     "bunyan": "^1.8.12",
     "fluent-logger": "2.2.0",
     "on-finished": "2.3.0"
