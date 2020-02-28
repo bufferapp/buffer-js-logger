@@ -1,4 +1,4 @@
-const BuffLog = require('bufflog');
+const BuffLog = require('@bufferapp/bufflog');
 const onFinished = require('on-finished');
 const { getRequestDataToLog } = require('./lib/utils');
 
