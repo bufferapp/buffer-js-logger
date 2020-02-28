@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "@bufferapp/bufflog": "0.0.3",
-    "bunyan": "1.8.1",
+    "bunyan": "^1.8.12",
     "fluent-logger": "2.2.0",
     "on-finished": "2.3.0"
   },
