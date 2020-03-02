@@ -1,6 +1,6 @@
 {
   "name": "@bufferapp/logger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Logging for Buffer.com's node applications",
   "main": "logger.js",
   "scripts": {
