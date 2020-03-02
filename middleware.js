@@ -47,7 +47,7 @@ module.exports = function middleware(options) {
       };
 
       if (response.error) {
-        bufflog.error(msg, info);
+        bufflog.error(response.error, info);
       } else {
         bufflog.info(msg, info);
       }
