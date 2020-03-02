@@ -1,4 +1,4 @@
-const createLogger = require('./logger');
+const bufflog = require('@bufferapp/bufflog');
 const onFinished = require('on-finished');
 const { getRequestDataToLog } = require('./lib/utils');
 
@@ -10,7 +10,6 @@ const { getRequestDataToLog } = require('./lib/utils');
  * @return {Function}
  */
 module.exports = function middleware(options) {
-  const logger = createLogger(options);
   const {
     getMetadata,
     getStats,
@@ -47,7 +46,11 @@ module.exports = function middleware(options) {
         stats,
       };
 
-      logger.info(info, msg);
+      if (response.error) {
+        bufflog.error(msg, info);
+      } else {
+        bufflog.info(msg, info);
+      }
     });
 
     next();
